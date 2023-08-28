@@ -7,6 +7,8 @@ typedef unsigned long long U64;
 #define NAME "Engine"
 #define BOARD_SQUARE_NUMBER 120
 
+#define MAXGAMESMOVES 2048
+
 // This enum represents all of the pieces 
 enum { EMPTY, wP, wN, wB, wR, wQ, wK, bP, bN, bB, bR, bQ, bK };
 
@@ -33,6 +35,9 @@ enum {
 
 enum { FALSE, TRUE };
 
+// This holds the casteling rights for each side
+enum {WhiteKingCasteling = 1, WhiteQueenCasteling = 2, BlackKingCasteling = 4, BlackQueenCasteling = 8};
+
 typedef struct {
 	// This makes an Array of the board in this case of the size of 120
 	int pieces[BOARD_SQUARE_NUMBER];
@@ -58,6 +63,9 @@ typedef struct {
 	// This represents how many halfmoves are made in the hole game
 	// This is useful for preventing repition of moves for example
 	int hisPly;
+	
+	// This holds the caste Permissions
+	int castelePerm;
 	
 	// This is a key that gets generated for each unique position
 	U64 posKey;
