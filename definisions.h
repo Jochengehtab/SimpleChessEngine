@@ -39,6 +39,16 @@ enum { FALSE, TRUE };
 enum {WhiteKingCasteling = 1, WhiteQueenCasteling = 2, BlackKingCasteling = 4, BlackQueenCasteling = 8};
 
 typedef struct {
+	
+	int move;
+	int castelePerm;
+	int enPassant;
+	int fifty_Move_Rule;
+	U64 posKey;
+	
+} S_UNDO;
+
+typedef struct {
 	// This makes an Array of the board in this case of the size of 120
 	int pieces[BOARD_SQUARE_NUMBER];
 	
@@ -58,13 +68,13 @@ typedef struct {
 	int fiftyMoveCounter;
 	
 	// This represents how many halfmoves are we in the game
-	int ply;
+	int play;
 	
 	// This represents how many halfmoves are made in the hole game
 	// This is useful for preventing repition of moves for example
-	int hisPly;
+	int historyPlay;
 	
-	// This holds the caste Permissions
+	// This holds the castle permissions
 	int castelePerm;
 	
 	// This is a key that gets generated for each unique position
@@ -82,6 +92,9 @@ typedef struct {
 	
 	// This stores the Knight and Bishop
 	int minPieces[3];
+	
+	S_UNDO history[MAXGAMESMOVES];
+	
 } S_BOARD;
 
 #endif
